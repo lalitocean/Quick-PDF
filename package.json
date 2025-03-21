@@ -4,7 +4,8 @@
   "description": "",
   "main": "webhook.js",
   "scripts": {
-    "dev": "nodemon  webhook.js"
+    "dev": "nodemon webhook.js",
+    "start": "node webhook.js"
   },
   "keywords": [],
   "author": "Lalit Ocean",
