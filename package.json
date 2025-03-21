@@ -1,0 +1,24 @@
+{
+  "name": "quick-pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webhook.js",
+  "scripts": {
+    "dev": "nodemon  webhook.js"
+  },
+  "keywords": [],
+  "author": "Lalit Ocean",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "axios": "^1.8.2",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongoose": "^8.12.1",
+    "pdfkit": "^0.16.0",
+    "telegraf": "^4.16.3"
+  }
+}
