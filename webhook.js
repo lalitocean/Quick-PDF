@@ -31,7 +31,7 @@ const setWebhook = async () => {
         const response = await axios.post(`https://api.telegram.org/bot${process.env.TELIGRAM_BOT_KEY}/setWebhook`, {
             url: webhookUrl,
         });
-        console.log('Webhook set successfully:', response.data);
+        console.log('Webhook set successfully');
     } catch (error) {
         console.error('Error setting webhook:', error);
     }

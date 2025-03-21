@@ -27,8 +27,7 @@ const inlineKeyboardHelper = (ctx, text, keyboard) => {
 
 bot.start(async (ctx) => {
     try {
-        console.log("ctx", ctx);
-        console.log("ctx.update", ctx.update)
+
         ctx.sendChatAction('typing');
         const from = ctx.update.message.from;
         // saving the data in the database 
