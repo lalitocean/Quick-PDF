@@ -109,6 +109,13 @@ bot.action(['firstColumn', 'secondColumn', 'thirdColumn'], async (ctx) => {
             { upsert: true }
         );
     }
+    if (columnCount === 'thirdColumn') {
+        await ContentModal.findOneAndUpdate(
+            { tgId: from.id },
+            { $set: { columnValue: 3 } },
+            { upsert: true }
+        );
+    }
 
     fontSizeHelperFunction(ctx)
 })
@@ -119,15 +126,12 @@ bot.action(['7', '8', '9', '10', '11', '12', '13'], async (ctx) => {
         const pagefontSize = parseInt(ctx.update.callback_query.data)
         const from = ctx.update.callback_query.from
 
-        // save the setting in the database 
-        if (pagefontSize !== 7) {
+        await ContentModal.findOneAndUpdate(
+            { tgId: from.id },
+            { $set: { fontSize: pagefontSize } },
+            { upsert: true }
+        );
 
-            await ContentModal.findOneAndUpdate(
-                { tgId: from.id },
-                { $set: { fontSize: pagefontSize } },
-                { upsert: true }
-            );
-        }
         mainMenuHelperfunction(ctx)
     } catch (error) {
         console.log(error)
@@ -276,7 +280,7 @@ bot.command('generate', async (ctx) => {
         });
 
         // Add all content at once
-        doc.text(fullContent, { columns: columnValue, align: 'justify' });
+        doc.text(fullContent, { columns: columns, align: 'justify' });
 
         // Create write stream to save the document
         const writeStream = fs.createWriteStream(filePath);
