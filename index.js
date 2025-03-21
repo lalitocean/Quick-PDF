@@ -276,7 +276,7 @@ bot.command('generate', async (ctx) => {
         });
 
         // Add all content at once
-        doc.text(fullContent, { columns, align: 'justify' });
+        doc.text(fullContent, { columns: columnValue, align: 'justify' });
 
         // Create write stream to save the document
         const writeStream = fs.createWriteStream(filePath);
@@ -307,6 +307,7 @@ bot.command('setting', (ctx) => {
     }
 })
 bot.command('feedback', async (ctx) => {
+
     try {
         //* check if the user exists in the database or not 
         const from = ctx.update.message.from;
@@ -322,7 +323,7 @@ bot.command('feedback', async (ctx) => {
         }
 
         // Storing the feedback in the database 
-        const feedbackMessage = ctx.message.text
+        const feedbackMessage = ctx.update.message.text
 
 
         // Find feedback for the user
