@@ -45,5 +45,5 @@ setWebhook();
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server is listening at https://localhost:${port}`);
+    console.log(`Server is listening at ${process.env.HOST_NAME}${port}`);
 });
