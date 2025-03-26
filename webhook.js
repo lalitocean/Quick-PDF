@@ -8,6 +8,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+const telegramAPI = `https://api.telegram.org/bot${process.env.TELIGRAM_BOT_KEY}`;
 app.use(express.json());
 try {
     connectDB();
@@ -25,22 +26,24 @@ app.post('/webhook', (req, res) => {
 
 // Set webhook URL
 const setWebhook = async () => {
-    const webhookUrl = `${process.env.HOST_NAME}/webhook`;
+    let webhookUrl;
+
+    if (process.env.NODE_ENV === 'production') {
+        webhookUrl = `${process.env.HOST_NAME_PROD}/webhook`;
+    } else {
+        webhookUrl = `${process.env.HOST_NAME_DEV}/webhook`;; // Fallback for development
+    }
 
     try {
-        const response = await axios.post(`https://api.telegram.org/bot${process.env.TELIGRAM_BOT_KEY}/setWebhook`, {
+        const response = await axios.post(`${telegramAPI}/setWebhook`, {
             url: webhookUrl,
-
-        }, {
-            timeout: 10000
         });
-        console.log('Webhook set successfully');
+        console.log('Webhook set successfully:', response.data);
     } catch (error) {
         console.error('Error setting webhook:', error);
     }
 };
 
-// function to set the webhook
 setWebhook();
 
 // Start the server
